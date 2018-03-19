@@ -1,0 +1,21 @@
+---
+- name: Install nginx
+  package:
+    name: nginx=1.10*
+    state: present
+
+- name: Set the nginx configuration
+  template:
+    src=templates/nginx.conf.j2
+    dest=/etc/nginx/nginx.conf
+  notify:
+    - restart webserver
+
+- name: Set firewall permissions for nginx
+  ufw:
+    rule: allow
+    name: 'Nginx Full'
+  become: yes
+  become_user: root
+  notify:
+    - restart webserver
