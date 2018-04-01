@@ -1,7 +1,7 @@
 ---
 - name: Install nginx
   package:
-    name: nginx=1.10*
+    name: "nginx={{ nginx_version }}"
     state: present
 
 - name: Set the nginx configuration
